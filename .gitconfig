@@ -1,0 +1,76 @@
+[core]
+	excludesfile = ~/.gitignore
+    whitespace = trailing-space,space-before-tab
+	pager = less -FXR
+	
+[user]
+	name = Tushar Sonawane
+	email = tusharlsonawane@gmail.com
+	
+[color]
+	ui = auto
+	interactive = auto
+	pager = true
+	
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+
+[color "status"]
+	added = green
+	untracked = cyan
+		
+[alias]
+	a = !git add . && git status
+	aa = !git add . && git add -u . && git status
+	ac = !git add . && git commit
+	acm = !git add . && git commit -m
+	alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\\t => \\2/' | sort
+	au = !git add -u . && git status
+	authors = "!git log --pretty=format:%aN | sort | uniq -c | sort -rn"
+	c = commit
+	cm = commit -m
+	ca = commit --amend # careful
+	conflicted = grep --name-only --full-name '<<<<<<< HEAD'
+	d = diff --color-words
+	df = diff
+	dh = diff --color-words head
+	irb = rebase --interactive
+	l = log --graph --all --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(white)- %an, %ar%Creset'
+	latest = for-each-ref --count=10 --sort=-committerdate --format='%(committerdate:short) %(refname:short)'
+	ll = log --stat --abbrev-commit
+	master = checkout master
+	rb = rebase
+	rba = rebase --abort
+	rbc = rebase --continue
+	rbs = rebase --skip
+	rh = reset --hard
+	s = status
+	sl = shortlog
+	ss = status -s
+	st = stash
+	stl = stash list
+	stp = stash pop
+	spull = svn rebase
+	spush = svn dcommit
+	undo = reset --soft HEAD@{1}
+	
+[advice]
+	pushNonFastForward = false
+	statusHints = false
+		
+[apply]
+	whitespace = nowarn
+	
+[pull]
+    rebase = true
+	
+[push]
+  default = simple
