@@ -2,16 +2,16 @@
 	excludesfile = ~/.gitignore
     whitespace = trailing-space,space-before-tab
 	pager = less -FXR
-	
+
 [user]
 	name = Tushar Sonawane
 	email = tusharlsonawane@gmail.com
-	
+
 [color]
 	ui = auto
 	interactive = auto
 	pager = true
-	
+
 [color "branch"]
 	current = yellow reverse
 	local = yellow
@@ -26,7 +26,7 @@
 [color "status"]
 	added = green
 	untracked = cyan
-		
+
 [alias]
 	a = !git add . && git status
 	aa = !git add . && git add -u . && git status
@@ -40,13 +40,13 @@
 	ca = commit --amend # careful
 	conflicted = grep --name-only --full-name '<<<<<<< HEAD'
 	d = diff --color-words
-	df = diff
 	dh = diff --color-words head
 	irb = rebase --interactive
 	l = log --graph --all --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(white)- %an, %ar%Creset'
 	latest = for-each-ref --count=10 --sort=-committerdate --format='%(committerdate:short) %(refname:short)'
 	ll = log --stat --abbrev-commit
 	master = checkout master
+	report = log --since='2 sunday ago' --until='now' --format='%Cgreen%ci%Creset %s%Creset' --no-merges
 	rb = rebase
 	rba = rebase --abort
 	rbc = rebase --continue
@@ -61,16 +61,18 @@
 	spull = svn rebase
 	spush = svn dcommit
 	undo = reset --soft HEAD@{1}
-	
+	whatis = show -s --pretty='tformat:%h (%s, %ad)' --date=short
+	whois = "!sh -c 'git log -i -1 --pretty=\"format:%an <%ae>\n\" --author=\"$1\"' -"
+
 [advice]
 	pushNonFastForward = false
 	statusHints = false
-		
+
 [apply]
 	whitespace = nowarn
-	
+
 [pull]
     rebase = true
-	
+
 [push]
   default = simple
