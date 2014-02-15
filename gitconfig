@@ -1,32 +1,25 @@
 [core]
-	excludesfile = ~/.gitignore
-    whitespace = trailing-space,space-before-tab
+	whitespace = trailing-space,space-before-tab
 	pager = less -FXR
-
 [user]
 	name = Tushar Sonawane
 	email = tusharlsonawane@gmail.com
-
 [color]
 	ui = auto
 	interactive = auto
 	pager = true
-
 [color "branch"]
 	current = yellow reverse
 	local = yellow
 	remote = green
-
 [color "diff"]
 	meta = yellow bold
 	frag = magenta bold
 	old = red bold
 	new = green bold
-
 [color "status"]
 	added = green
 	untracked = cyan
-
 [alias]
 	a = !git add . && git status
 	aa = !git add . && git add -u . && git status
@@ -38,15 +31,15 @@
 	c = commit
 	cm = commit -m
 	ca = commit --amend # careful
-	conflicted = grep --name-only --full-name '<<<<<<< HEAD'
+	conflicted = grep --name-only --full-name '<<<<<<<'
 	d = diff --color-words
 	dh = diff --color-words head
 	irb = rebase --interactive
-	l = log --graph --all --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(white)- %an, %ar%Creset'
+	l = log --stat --abbrev-commit
 	latest = for-each-ref --count=10 --sort=-committerdate --format='%(committerdate:short) %(refname:short)'
-	ll = log --stat --abbrev-commit
+	ll = log --graph --all --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(white)- %an, %ar%Creset'
 	master = checkout master
-	report = log --since='2 sunday ago' --until='now' --format='%Cgreen%ci%Creset %s%Creset' --no-merges
+	report = log --since='2 sunday ago' --until='now' --format='%C(yellow)%h %Cgreen%ad%x08%x08%x08%x08%x08%x08%x08%x08%x08%x08%x08%x08%x08%x08%x08%x08%x08%x08%x08%x08 %C(cyan)%aN %Creset%s' --no-merges
 	rb = rebase
 	rba = rebase --abort
 	rbc = rebase --continue
@@ -56,6 +49,7 @@
 	sl = shortlog
 	ss = status -s
 	st = stash
+	stash-unapply = !git stash show -p | git apply -R
 	stl = stash list
 	stp = stash pop
 	spull = svn rebase
@@ -63,16 +57,12 @@
 	undo = reset --soft HEAD@{1}
 	whatis = show -s --pretty='tformat:%h (%s, %ad)' --date=short
 	whois = "!sh -c 'git log -i -1 --pretty=\"format:%an <%ae>\n\" --author=\"$1\"' -"
-
 [advice]
 	pushNonFastForward = false
 	statusHints = false
-
 [apply]
 	whitespace = nowarn
-
 [pull]
-    rebase = true
-
+	rebase = true
 [push]
-  default = simple
+	default = simple

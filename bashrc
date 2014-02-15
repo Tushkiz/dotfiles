@@ -1,10 +1,3 @@
-# Project Related Variables
-# Versa Aliases
-alias versa='cd /d/versa-source'
-export S196='versa@10.192.0.196'
-export S197='versa@10.192.0.197'
-export S198='versa@10.192.0.198'
-
 # All
 export EDITOR=vim
 
@@ -26,9 +19,6 @@ alias vimrc='$EDITOR ~/.vimrc && source ~/.vimrc'
 
 # SSH Key generator alias
 #alias mksshkey="ssh-keygen -b 8192 -t rsa -C '$1' -f ~/.ssh/$1.rsa"
-
-# git aliases
-alias g='git'
 
 # Fancy prompt
 #export PS1="\[\033[01;32m\]\u@\h\[\033[01;34m\]$(__git_ps1 " (%s)") \w \$\[\033[00m\] "
