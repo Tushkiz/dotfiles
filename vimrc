@@ -1,12 +1,19 @@
 set nocompatible
-syntax enable
+set backspace=indent,eol,start " allow backspacing over everything in insert mode
+set showcmd                    " display incomplete commands
+set autoindent
+set nowrap
 set number
 set ruler
 set wildmenu
 set laststatus=2
 set ts=4 sts=4 sw=4 expandtab
+set et
+set smarttab
 
-filetype off                  " detect the type of file
+syntax enable
+
+filetype off				  " detect the type of file
 filetype indent on            " Enable filetype-specific indenting
 filetype plugin on            " Enable filetype-specific plugin
 
@@ -26,7 +33,7 @@ set wildmenu
 " open), and from the current tags file.
 set complete=.,b,u,]
 
-set background=light
+set bg=light
 
 " Sane searching
 set hlsearch                  " Hilight search term
