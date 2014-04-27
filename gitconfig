@@ -1,6 +1,8 @@
 [core]
-	whitespace = trailing-space,space-before-tab
+	autocrlf = false
+	editor = vim
 	pager = less -FXR
+    whitespace = trailing-space,space-before-tab
 [user]
 	name = Tushar Sonawane
 	email = tusharlsonawane@gmail.com
@@ -21,42 +23,90 @@
 	added = green
 	untracked = cyan
 [alias]
+	# add
 	a = !git add . && git status
 	aa = !git add . && git add -u . && git status
 	ac = !git add . && git commit
-	acm = !git add . && git commit -m
-	alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\\t => \\2/' | sort
 	au = !git add -u . && git status
+	acm = !git add . && git commit -m
+	chunkyadd = add --patch					# stage commits chunk by chunk
+	
+	# alias list
+	alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\\t => \\2/' | sort
+	
+	# authors list
 	authors = "!git log --pretty=format:%aN | sort | uniq -c | sort -rn"
-	c = commit
-	cm = commit -m
-	ca = commit --amend # careful
-	conflicted = grep --name-only --full-name '<<<<<<<'
-	d = diff --color-words
-	dh = diff --color-words head
-	irb = rebase --interactive
-	l = log --stat --abbrev-commit
-	latest = for-each-ref --count=10 --sort=-committerdate --format='%(committerdate:short) %(refname:short)'
-	ll = log --graph --all --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(white)- %an, %ar%Creset'
+	whois = "!sh -c 'git log -i -1 --pretty=\"format:%an <%ae>\n\" --author=\"$1\"' -"
+	
+	# branch
+	b = branch -v							# branch (verbose)
+	
+	# commit
+	ci = commit								# commit
+	cm = commit -m							# commit with message
+	ca = commit -am							# commit all with message
+	amend = commit --amend					# amend last commit
+	
+	# checkout
+	co = checkout                     		# checkout
+	nb = checkout -b                  		# create and switch to a new branch
 	master = checkout master
+	
+	# conflicted files list
+	conflicted = grep --name-only --full-name '<<<<<<<'
+	
+	# diff
+	d = diff								# diff unstaged changes
+	dc = diff --cached						# diff staged changes
+	last = diff HEAD^						# diff last committed changes
+	
+	# log
+	l = log --stat --abbrev-commit
+	ll = log --graph --all --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(white)- %an, %ar%Creset'
+	whatis = show -s --pretty='tformat:%h (%s, %ad)' --date=short
+	
+	# pull
+	pl = pull       	                	# pull
+
+	# push
+	ps = push           	              	# push
+	
+	# reports for fun
 	report = log --since='2 sunday ago' --until='now' --format='%C(yellow)%h %Cgreen%ad%x08%x08%x08%x08%x08%x08%x08%x08%x08%x08%x08%x08%x08%x08%x08%x08%x08%x08%x08%x08 %C(cyan)%aN %Creset%s' --no-merges
+	
+	# rebase
 	rb = rebase
 	rba = rebase --abort
 	rbc = rebase --continue
 	rbs = rebase --skip
-	rh = reset --hard
-	s = status
-	sl = shortlog
-	ss = status -s
+	irb = rebase --interactive
+	
+	# remote 
+	r = remote -v							# show remotes (verbose)
+	
+	# reset
+	unstage = reset HEAD					# remove files from index (tracking)
+	uncommit = reset --soft HEAD^			# go back before last commit, with files in uncommitted state
+	filelog = log -u                  		# show changes to a file
+	
+	# stash
 	st = stash
 	stash-unapply = !git stash show -p | git apply -R
 	stl = stash list
+	sta = stash apply
 	stp = stash pop
+	std = stash drop
+	
+	# status
+	s = status
+	sl = shortlog
+	ss = status -s
+	
+	# svn helpers
 	spull = svn rebase
 	spush = svn dcommit
-	undo = reset --soft HEAD@{1}
-	whatis = show -s --pretty='tformat:%h (%s, %ad)' --date=short
-	whois = "!sh -c 'git log -i -1 --pretty=\"format:%an <%ae>\n\" --author=\"$1\"' -"
+	srebase = svn rebase
+	slog = svn log --oneline --show-commit
 [advice]
 	pushNonFastForward = false
 	statusHints = false
@@ -66,3 +116,5 @@
 	rebase = true
 [push]
 	default = simple
+[diff]
+	mnemonicprefix = true
