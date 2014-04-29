@@ -96,6 +96,7 @@
 	sta = stash apply
 	stp = stash pop
 	std = stash drop
+	sts = stash save
 
 	# status
 	s = status
