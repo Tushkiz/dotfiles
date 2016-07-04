@@ -26,7 +26,40 @@ alias vimrc='$EDITOR ~/.vimrc && source ~/.vimrc'
 # git's default
 #export PS1="\[\033]0;$MSYSTEM:${PWD//[^[:ascii:]]/?}\007\]\n\[\033[32m\]\u@\h \[\033[33m\]\w$(__git_ps1)\[\033[0m\]\n$"
 
-export PS1="\[\e[32m\]\u\[\e[0m\]\[\e[32m\]@\h \[\e[36m\]\w\[\e[33m\]\$(__git_ps1)\[\e[0m\]\n$ "
+#export PS1="\[\e[32m\]\u\[\e[0m\]\[\e[32m\]@\h \[\e[36m\]\w\[\e[33m\]\$(__git_ps1)\[\e[0m\]\n$ "
+
+set_prompt () {
+  # http://stackoverflow.com/questions/22361722/simplifying-advanced-bash-prompt-variable-ps1-code?rq=1
+  local last_command=$? # Must come first!
+  PS1=""
+  local blue='\[\e[01;34m\]'
+  local white='\[\e[01;37m\]'
+  local red='\[\e[01;31m\]'
+  local green='\[\e[01;32m\]'
+  local reset='\[\e[00m\]'
+  local fancyX='\342\234\227'
+  local checkmark='\342\234\223'
+
+  # checkmark indicating last command output
+  # PS1+="$white\$? "
+  # if [[ $last_command == 0 ]]; then
+  #     PS1+="$green$checkmark "
+  # else
+  #     PS1+="$red$fancyX "
+  # fi
+
+  # user@hostname
+  # if [[ $EUID == 0 ]]; then
+  #     PS1+="$red\\h "
+  # else
+  #     PS1+="$green\\u@\\h "
+  # fi
+  PS1+="$blue\\w"
+  PS1+="$green$(__git_ps1)$reset"
+  PS1+="\n-> "
+}
+
+PROMPT_COMMAND='set_prompt'
 
 # Some fancy history stuff
 export HISTCONTROL=erasedups  # No duplicates
@@ -36,3 +69,10 @@ alias h='history | grep' # Easy history grep
 
 # Keyword Bindings
 bind '\C-f:unix-filename-rubout'
+
+# history search using up/down keys
+if [[ $- == *i* ]]
+then
+    bind '"\e[A": history-search-backward'
+    bind '"\e[B": history-search-forward'
+fi
