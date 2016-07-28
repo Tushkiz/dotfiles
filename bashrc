@@ -76,3 +76,7 @@ then
     bind '"\e[A": history-search-backward'
     bind '"\e[B": history-search-forward'
 fi
+
+# zsh like menu cycle (close enough)
+bind 'TAB:menu-complete'
+
