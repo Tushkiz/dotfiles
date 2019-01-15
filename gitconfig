@@ -36,12 +36,8 @@
 
 	# branch
 	b = branch -v					# branch (verbose)
-	bb = git reflog |				# git checkout history (https://twitter.com/nick_zuber/status/1084996385731239936)
-	     grep checkout |
-	     grep -o -E 'to (.*)' |
-	     sed -e 's/to/  /' |
-	     sed -e '1s/   / ∗ /' |
-	     less
+	# git checkout history (https://twitter.com/nick_zuber/status/1084996385731239936)
+	bb = "!git reflog | grep checkout | grep -o -E 'to (.*)' | sed -e 's/to/  /' | sed -e '1s/   / ∗ /' | less"
 
 	# commit
 	cm = commit -m					# commit with message
