@@ -1,9 +1,9 @@
 [core]
 	autocrlf = false
+	safecrlf = true
 	editor = vim
 	pager = less -FXR
-    whitespace = trailing-space,space-before-tab
-	excludesfile = /Users/tushkiz/.gitignore
+	whitespace = trailing-space,space-before-tab
 [user]
 	name = Tushar Sonawane
 	email = tusharlsonawane@gmail.com
@@ -26,7 +26,6 @@
 [alias]
 	# add
 	a = !git add . && git status
-    chunkyadd = add --patch                 # stage commits chunk by chunk
 
 	# alias list
 	alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\\t => \\2/' | sort
@@ -36,22 +35,28 @@
 	whois = "!sh -c 'git log -i -1 --pretty=\"format:%an <%ae>\n\" --author=\"$1\"' -"
 
 	# branch
-	b = branch -v                           # branch (verbose)
+	b = branch -v					# branch (verbose)
+	bb = git reflog |				# git checkout history (https://twitter.com/nick_zuber/status/1084996385731239936)
+	     grep checkout |
+	     grep -o -E 'to (.*)' |
+	     sed -e 's/to/  /' |
+	     sed -e '1s/   / ∗ /' |
+	     less
 
 	# commit
-	cm = commit -m						    # commit with message
+	cm = commit -m					# commit with message
 
 	# checkout
-    co = checkout           	    		# checkout
-	nb = checkout -b               	  		# create and switch to a new branch
+	co = checkout					# checkout
+	nb = checkout -b				# create and switch to a new branch
 
 	# conflicted files list
 	conflicted = grep --name-only --full-name '<<<<<<<'
 
 	# diff
-	d = diff					        	# diff unstaged changes
-	dc = diff --cached				    	# diff staged changes
-	last = diff HEAD^				    	# diff last committed changes
+	d = diff					# diff unstaged changes
+	dc = diff --cached				# diff staged changes
+	last = diff HEAD^				# diff last committed changes
 
 	# log
 	l = log --stat --abbrev-commit
@@ -62,12 +67,12 @@
 	report = log --since='2 sunday ago' --until='now' --format='%C(yellow)%h %Cgreen%ad%x08%x08%x08%x08%x08%x08%x08%x08%x08%x08%x08%x08%x08%x08%x08%x08%x08%x08%x08%x08 %C(cyan)%aN %Creset%s' --no-merges
 
 	# remote
-	r = remote -v						# show remotes (verbose)
+	r = remote -v														# show remotes (verbose)
 
 	# reset
-	unstage = reset HEAD					# remove files from index (tracking)
+	unstage = reset HEAD				# remove files from index (tracking)
 	uncommit = reset --soft HEAD^
-	filelog = log -u                  			# show changes to a file
+	filelog = log -u				# show changes to a file
 
 	# stash
 	stash-unapply = !git stash show -p | git apply -R
